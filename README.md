@@ -84,24 +84,16 @@ frontend/ # HTML, CSS, JS
  git clone https://github.com/yasar68/Kapsamli-berber-randevu-sistemi.git
 
 2. Backend’e gidin ve bağımlılıkları yükleyin:
- ```bash
+
  cd backend/BerberApp.API
  dotnet restore
  dotnet run
 
 3. Frontend’i tarayıcıda çalıştırmak için kök dizinde:
- ```bash
+
  python -m http.server 8000
 
-💡 Gelecek Planlar
-
-    Frontend’in tam işlevsel hâle getirilmesi.
-
-    Admin panelindeki hataların düzeltilmesi.
-
-    Daha büyük ölçekli veritabanı entegrasyonu (SQL Server veya PostgreSQL).
-
-    Mobil uyumlu tasarım ve push bildirimleri.
+ bash```
 
 Bu sistem, berberler ve müşteriler için hızlı, güvenilir ve görsel olarak anlaşılır bir randevu deneyimi sunmayı amaçlamaktadır.
 
