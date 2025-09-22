@@ -82,7 +82,7 @@ frontend/ # HTML, CSS, JS
 1. Repo’yu klonlayın:  
 
     ```bash
-        git clone https://github.com/yasar68/      Kapsamli-berber-randevu-sistemi.git
+        git clone https://github.com/yasar68/Kapsamli-berber-randevu-sistemi.git
 
 2. Backend’e gidin ve bağımlılıkları yükleyin:
 
