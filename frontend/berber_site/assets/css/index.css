@@ -1,0 +1,560 @@
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2c3e50;
+  --accent-color: #e74c3c;
+  --light-color: #ecf0f1;
+  --dark-color: #2c3e50;
+  --text-color: #34495e;
+  --text-light: #7f8c8d;
+  --background-color: #f9f9f9;
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Genel Stiller */
+body {
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Ana içerik kapsayıcı */
+.main-container {
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 2.5rem;
+}
+
+/* Başlık Stilleri */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: var(--dark-color);
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  position: relative;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  border-radius: 2px;
+}
+
+/* Carousel Bölümü - GÜNCELLENDİ */
+.carousel-container {
+  max-width: 1200px;
+  margin: 2rem auto 4rem;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  position: relative;
+}
+
+.carousel {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-inner {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 16/9; /* Oran koruma eklendi */
+}
+
+.carousel-item {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+.carousel-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Resmi kırpmadan sığdırma */
+  filter: brightness(0.9);
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 25%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+  max-width: 500px;
+  width: 80%;
+  color: white;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+}
+
+
+.carousel-item.active .carousel-caption {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.carousel-caption h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Metin gölgesi eklendi */
+}
+
+.carousel-caption p {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.95); /* Yazı rengi açıldı */
+  margin-bottom: 1.5rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Metin gölgesi eklendi */
+}
+
+/* Carousel Kontrol Butonları - TAM ORTALAMA İÇİN GÜNCELLENDİ */
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute !important;
+  top: 50% !important; /* Dikeyde tam ortala */
+  transform: translateY(-50%) !important;
+  width: 50px !important;
+  height: 50px !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 10 !important;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.carousel:hover .carousel-control-prev,
+.carousel:hover .carousel-control-next {
+  opacity: 1;
+}
+
+.carousel-control-prev {
+  left: 20px !important;
+  right: auto !important;
+}
+
+.carousel-control-next {
+  right: 20px !important;
+  left: auto !important;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 2rem;
+  height: 2rem;
+  background-size: 100% 100%;
+}
+
+/* Carousel Göstergeleri */
+.carousel-indicators {
+  bottom: 20px;
+  z-index: 10;
+}
+
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin: 0 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicators .active {
+  background-color: white;
+  width: 30px;
+  border-radius: 6px;
+}
+
+/* Hizmetler Bölümü */
+.service-section {
+  padding: 4rem 0;
+}
+
+.service-card {
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  height: 100%;
+  transition: var(--transition);
+  box-shadow: var(--card-shadow);
+  border: none;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.service-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  background: rgba(52, 152, 219, 0.1);
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.service-card:hover .service-icon {
+  background: var(--primary-color);
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.service-card h5 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: var(--dark-color);
+}
+
+.service-card p {
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+/* Randevu Bölümü */
+.appointment-section {
+  padding: 4rem 0;
+}
+
+.appointment-card {
+  background: linear-gradient(135deg, var(--secondary-color), #1a252f);
+  color: white;
+  padding: 3rem;
+  border-radius: 12px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.appointment-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  transform: rotate(30deg);
+  transition: var(--transition);
+}
+
+.appointment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.appointment-card:hover::before {
+  transform: rotate(30deg) translateX(50px);
+}
+
+.appointment-card h3 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.appointment-card p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+}
+
+.appointment-card .btn {
+  background-color: var(--primary-color);
+  border: none;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  align-self: flex-start;
+  transition: var(--transition);
+  position: relative;
+  z-index: 1;
+}
+
+.appointment-card .btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.appointment-image {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  height: 100%;
+  min-height: 300px;
+}
+
+.appointment-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.appointment-image:hover img {
+  transform: scale(1.03);
+}
+
+/* Berber Tanıtım Bölümü */
+.berber-section {
+  background: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  margin: 4rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.berber-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+}
+
+.berber-content {
+  padding-left: 2rem;
+}
+
+.berber-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.berber-slogan {
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.berber-slogan::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: -10px;
+  font-size: 3rem;
+  color: rgba(52, 152, 219, 0.2);
+  font-family: Georgia, serif;
+}
+
+.berber-section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+.berber-image {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+  height: 100%;
+}
+
+.berber-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.berber-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Responsive Ayarlar */
+@media (max-width: 1200px) {
+  .main-container {
+    padding: 2rem;
+  }
+  
+  .carousel-caption {
+    bottom: 15%;
+    max-width: 400px;
+  }
+  
+  .carousel-caption h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .carousel-caption {
+    padding: 1.5rem;
+    bottom: 10%;
+  }
+  
+  .carousel-caption h2 {
+    font-size: 1.8rem;
+  }
+  
+  .carousel-caption p {
+    font-size: 1rem;
+  }
+  
+  .service-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .appointment-card {
+    padding: 2.5rem;
+  }
+  
+  .berber-section {
+    padding: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    padding: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .carousel-caption {
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1.5rem;
+    margin-top: -5px;
+    border-radius: 0 0 12px 12px;
+  }
+  
+  .carousel-caption h2 {
+    font-size: 1.5rem;
+  }
+  
+  .service-card {
+    margin-bottom: 1.5rem;
+  }
+  
+  .appointment-card {
+    margin-bottom: 2rem;
+  }
+  
+  .berber-content {
+    padding-left: 0;
+    padding-top: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-container {
+    padding: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .carousel-caption h2 {
+    font-size: 1.3rem;
+  }
+  
+  .carousel-caption p {
+    font-size: 0.9rem;
+  }
+  
+  .service-card {
+    padding: 1.8rem 1.2rem;
+  }
+  
+  .appointment-card {
+    padding: 2rem;
+  }
+  
+  .berber-section {
+    padding: 2rem 1.5rem;
+  }
+}

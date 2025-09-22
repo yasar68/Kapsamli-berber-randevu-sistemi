@@ -1,0 +1,409 @@
+/* HEADER STYLES - PROFESSIONAL BARBERSHOP */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2c3e50;
+  --accent-color: #e74c3c;
+  --light-color: #ecf0f1;
+  --dark-color: #2c3e50;
+  --text-color: #34495e;
+  --text-light: #7f8c8d;
+  --background-color: #f9f9f9;
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Base Styles */
+.header-navbar {
+  background: linear-gradient(135deg, var(--secondary-color), var(--dark-color));
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 0.8rem 0;
+  position: relative;
+  z-index: 1000;
+  font-family: 'Poppins', sans-serif;
+  transition: var(--transition);
+  color: white; /* Metin rengini beyaz olarak ayarladık */
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo Styles */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+  color: white; /* Logo metin rengi */
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+  margin-right: 10px;
+  color: var(--primary-color);
+  transition: transform 0.3s ease;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: inherit; /* Üst öğeden renk alır */
+  position: relative;
+}
+
+.logo-text strong {
+  color: var(--primary-color);
+}
+
+.navbar-brand:hover {
+  transform: translateX(5px);
+  color: white; /* Hover durumunda renk */
+}
+
+.navbar-brand:hover .logo-icon {
+  transform: rotate(15deg);
+}
+
+/* Navigation Links */
+.navbar-nav {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  position: relative;
+  margin: 0 0.3rem;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: var(--transition);
+  display: block;
+  position: relative;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--primary-color);
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-link:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link:hover::before {
+  width: 60%;
+}
+
+.nav-link.active {
+  color: white;
+  font-weight: 600;
+}
+
+.nav-link.active::before {
+  width: 80%;
+  background-color: var(--accent-color);
+}
+
+/* User Area Styles */
+.user-area {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.user-avatar:hover {
+  transform: scale(1.1);
+}
+
+.user-name {
+  color: white;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+/* Buttons */
+.btn-nav {
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: var(--transition);
+  cursor: pointer;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-login {
+  background-color: transparent;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-login:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn-register {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-register:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn-logout {
+  background-color: transparent;
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.btn-logout:hover {
+  background-color: var(--accent-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+/* Dropdown Menu */
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+  min-width: 200px;
+  padding: 10px 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+  transform: translateY(10px);
+  z-index: 1000;
+}
+
+.user-dropdown a {
+  color: var(--text-color);
+}
+
+.user-avatar:hover + .user-dropdown,
+.user-dropdown:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  padding: 0.5rem 1.5rem;
+  color: var(--text-color);
+  text-decoration: none;
+  display: block;
+  transition: var(--transition);
+}
+
+.dropdown-item:hover {
+  background-color: var(--light-color);
+  padding-left: 1.8rem;
+  color: var(--primary-color);
+}
+
+/* Mobile Menu */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .navbar-nav,
+  .user-area {
+    display: none;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .header-container {
+    position: relative;
+  }
+  
+  .mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--secondary-color);
+    padding: 1rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 8px 8px;
+  }
+  
+  .mobile-menu .nav-item {
+    margin: 0.5rem 0;
+  }
+  
+  .mobile-menu .nav-link {
+    padding: 0.8rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  
+  .mobile-menu .user-area {
+    display: flex;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Performance Optimizations */
+.navbar-nav,
+.user-area {
+  will-change: transform, opacity;
+}
+
+.nav-link,
+.btn-nav {
+  will-change: transform, background-color, color;
+}
+
+/* Print Styles */
+@media print {
+  .header-navbar {
+    display: none;
+  }
+}
+/* User Area Item */
+.user-area-item {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+  padding-left: 15px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Buton Yazı Renkleri */
+.btn-nav {
+  color: white !important; /* Tüm buton yazıları beyaz */
+}
+
+.btn-login {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: white !important; /* Giriş butonu yazı rengi */
+}
+
+.btn-register {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color) !important;
+  color: white !important; /* Kayıt butonu yazı rengi */
+  margin-left: 10px;
+}
+
+.btn-logout {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: white !important; /* Çıkış butonu yazı rengi */
+  margin-left: 10px;
+}
+
+/* Hover durumları */
+.btn-login:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white !important;
+}
+
+.btn-register:hover {
+  background-color: var(--primary-dark);
+  color: white !important;
+}
+
+.btn-logout:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--accent-color) !important;
+}
+
+/* Kullanıcı bilgisi container */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Buton ve kullanıcı adı arası boşluk */
+  padding: 0 10px;
+  transition: var(--transition);
+}
+
+/* Kullanıcı adı stil */
+.username {
+  color: white;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: var(--transition);
+  cursor: default; /* Üzerine gelindiğinde imleç */
+}
+
+/* Hover efekti */
+.username:hover {
+  color: var(--primary-color) !important;
+  text-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+/* Avatar hover uyumlu hale getirme */
+.user-info:hover .user-avatar {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 2px var(--primary-color);
+}
+

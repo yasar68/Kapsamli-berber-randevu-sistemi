@@ -1,0 +1,325 @@
+:root {
+    --primary: #4361ee;
+    --primary-light: #4895ef;
+    --secondary: #3f37c9;
+    --accent: #f72585;
+    --dark: #1b263b;
+    --light: #f8f9fa;
+    --gray: #e9ecef;
+    --gray-dark: #adb5bd;
+    --success: #4cc9f0;
+    --danger: #ef233c;
+    --warning: #f8961e;
+    --border-radius: 10px;
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f7fa;
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+.appointment-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.appointment-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.appointment-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.appointment-header p {
+    color: var(--dark);
+    font-size: 1.1rem;
+}
+
+.appointment-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.form-card, .list-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+    transition: var(--transition);
+    height: 100%;
+}
+
+.form-card:hover, .list-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.form-card h2, .list-header h2 {
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--gray-dark);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.25);
+    outline: none;
+}
+
+.form-check {
+    margin: 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-check-input {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.btn-submit {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: var(--transition);
+}
+
+.btn-submit:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+}
+
+.list-header {
+    margin-bottom: 1.5rem;
+}
+
+.filters {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.filter-group {
+    flex: 1;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--dark);
+}
+
+.appointment-list {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: var(--gray-dark);
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--gray-dark);
+}
+
+.appointment-item {
+    background: var(--light);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--primary);
+    transition: var(--transition);
+}
+
+.appointment-item:hover {
+    transform: translateX(5px);
+}
+
+.appointment-date {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.appointment-detail {
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.appointment-status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.status-confirmed {
+    background-color: rgba(76, 201, 240, 0.1);
+    color: var(--success);
+}
+
+.status-cancelled {
+    background-color: rgba(239, 35, 60, 0.1);
+    color: var(--danger);
+}
+
+.status-past {
+    background-color: rgba(173, 181, 189, 0.1);
+    color: var(--gray-dark);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 992px) {
+    .appointment-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .filters {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .appointment-container {
+        padding: 1.5rem;
+    }
+    
+    .appointment-header h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .appointment-container {
+        padding: 1rem;
+    }
+    
+    .form-card, .list-card {
+        padding: 1.25rem;
+    }
+}
+/* services-checkbox-list stilini güncelle */
+.services-checkbox-list {
+    border: 1px solid var(--gray-dark);
+    border-radius: var(--border-radius);
+    padding: 0.75rem;
+    max-height: 200px;
+    overflow-y: auto;
+    background: white;
+}
+
+.services-checkbox-list .form-check {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--gray);
+    margin-bottom: 0;
+}
+
+.services-checkbox-list .form-check:last-child {
+    border-bottom: none;
+}
+
+.services-checkbox-list .form-check-input {
+    margin-right: 10px;
+}
+
+.loading-services {
+    padding: 1rem;
+    text-align: center;
+    color: var(--gray-dark);
+}
+
+.selected-services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.service-badge {
+    background-color: var(--primary-light);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.service-badge .remove-service {
+    cursor: pointer;
+    font-size: 0.7rem;
+    margin-left: 5px;
+}

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Berber Cumali - Hizmetler</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <link href="../assets/css/services.css" rel="stylesheet" />
+  <style>
+    /* Acil yükleme için minimal kritik CSS */
+    #loading-spinner {
+      display: flex;
+      justify-content: center;
+      padding: 3rem 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <div id="header-placeholder"></div>
+
+  <!-- Ana İçerik -->
+  <div class="container-fluid py-4">
+    <section class="services-list" data-aos="fade-up">
+      <h2 class="mb-4">Hizmetlerimiz ve Fiyatlar</h2>
+
+      <div class="filter-container mb-5 text-center">
+        <label for="barber-filter" class="me-2 fw-semibold">Berbere Göre Filtrele:</label>
+        <select id="barber-filter" class="form-select d-inline-block w-auto">
+          <option value="all">Tüm Berberler</option>
+        </select>
+      </div>
+
+      <div id="services-container">
+        <!-- Yükleme göstergesi -->
+        <div id="loading-spinner" class="text-center py-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Yükleniyor...</span>
+          </div>
+        </div>
+        <!-- Hizmetler buraya yüklenecek -->
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scriptler -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+    // AOS Animasyonları
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 50
+    });
+
+    // Geliştirilmiş Header ve footer yükleme fonksiyonu
+    const loadComponent = async (id, url) => {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`${url} yüklenemedi`);
+        
+        const element = document.getElementById(id);
+        if (!element) throw new Error(`${id} elementi bulunamadı`);
+        
+        element.innerHTML = await res.text();
+        
+        // Header yüklenmişse CSS ve JS'ini ekle
+        if (id === 'header-placeholder') {
+          await loadDependencies('../assets/css/header.css', '../assets/js/Header.js');
+        }
+        // Footer yüklenmişse CSS'ini ekle
+        else if (id === 'footer-placeholder') {
+          await loadDependencies('../assets/css/footer.css');
+        }
+        
+      } catch (error) {
+        console.error(error);
+        const element = document.getElementById(id);
+        if (element) {
+          element.innerHTML = `
+            <div class="alert alert-danger m-3">${id.replace('-placeholder', '')} yüklenirken hata oluştu</div>
+          `;
+        }
+      }
+    };
+
+    // Bağımlılıkları yükle (CSS/JS)
+    const loadDependencies = async (...resources) => {
+      for (const resource of resources) {
+        try {
+          if (resource.endsWith('.css')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = resource;
+            document.head.appendChild(link);
+          } 
+          else if (resource.endsWith('.js')) {
+            await new Promise((resolve, reject) => {
+              const script = document.createElement('script');
+              script.src = resource;
+              script.onload = resolve;
+              script.onerror = reject;
+              document.body.appendChild(script);
+            });
+          }
+        } catch (err) {
+          console.error(`${resource} yüklenirken hata:`, err);
+        }
+      }
+    };
+
+    // API İşlemleri
+    const API_BASE_URL = 'http://localhost:5009/api/web';
+    let allServices = [];
+    let allBarbers = [];
+
+    const getAuthHeaders = () => ({
+      'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
+    });
+
+    // Berberleri yükle
+    const fetchBarbers = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/webbarber/all`, {
+          headers: getAuthHeaders()
+        });
+        if (!res.ok) throw new Error('Berberler yüklenemedi');
+        
+        allBarbers = await res.json();
+        const select = document.getElementById('barber-filter');
+        
+        allBarbers.forEach(barber => {
+          const option = new Option(
+            barber.fullName || barber.name || "İsimsiz Berber",
+            barber.id
+          );
+          select.add(option);
+        });
+      } catch (error) {
+        console.error(error);
+        document.getElementById('barber-filter').innerHTML = `
+          <option value="all">Yükleme hatası</option>
+        `;
+      }
+    };
+
+    // Hizmetleri yükle
+    const fetchServices = async () => {
+      const loadingSpinner = document.getElementById('loading-spinner');
+      try {
+        if (loadingSpinner) loadingSpinner.classList.remove('d-none');
+        
+        const res = await fetch(`${API_BASE_URL}/webservices/all`, {
+          headers: getAuthHeaders()
+        });
+        if (!res.ok) throw new Error('Hizmetler yüklenemedi');
+        
+        allServices = await res.json();
+        renderServices('all');
+      } catch (error) {
+        console.error(error);
+        const container = document.getElementById('services-container');
+        if (container) {
+          container.innerHTML = `
+            <div class="no-services alert alert-danger">
+              Hizmetler yüklenirken hata oluştu: ${error.message}
+            </div>
+          `;
+        }
+      } finally {
+        if (loadingSpinner) loadingSpinner.classList.add('d-none');
+      }
+    };
+
+    // Hizmetleri görüntüle
+    const renderServices = (barberId) => {
+      const container = document.getElementById('services-container');
+      if (!container) return;
+      
+      // Filtreleme
+      let filteredServices = barberId === 'all' 
+        ? allServices 
+        : allServices.filter(service => {
+            const barber = allBarbers.find(b => b.id.toString() === barberId);
+            return barber?.specialties?.includes(service.name);
+          });
+
+      // Hata durumları
+      if (!filteredServices.length) {
+        container.innerHTML = `
+          <div class="no-services alert alert-info text-center py-4">
+            ${barberId === 'all' 
+              ? 'Henüz hizmet eklenmemiş' 
+              : 'Bu berbere ait hizmet bulunamadı'}
+          </div>
+        `;
+        return;
+      }
+
+      // Hizmet kartlarını oluştur
+      container.innerHTML = filteredServices.map((service, index) => `
+        <div class="service-item" 
+             data-aos="fade-up" 
+             data-aos-delay="${(index % 3) * 100}">
+          <div class="service-info">
+            <h3 class="service-title">${service.name}</h3>
+            ${service.description ? `<p class="service-desc">${service.description}</p>` : ''}
+            <div class="service-meta">
+              <i class="bi bi-clock me-1"></i>
+              <span>Süre: ${service.durationMinutes ?? '-'} dakika</span>
+            </div>
+          </div>
+          <div class="service-price-duration">
+            <span class="service-price">${service.price.toFixed(2)} ₺</span>
+            <span class="service-duration">${service.durationMinutes ?? '-'} dakika</span>
+          </div>
+        </div>
+      `).join('');
+
+      if (window.AOS) AOS.refresh();
+    };
+
+    // Sayfa yüklendiğinde
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        // Önce header ve footer'ı paralel yükle
+        await Promise.all([
+          loadComponent('header-placeholder', 'header.html'),
+          loadComponent('footer-placeholder', 'footer.html')
+        ]);
+        
+        // Sonra verileri yükle
+        await fetchBarbers();
+        await fetchServices();
+        
+        // Filtre değişikliği dinleyicisini ekle
+        const barberFilter = document.getElementById('barber-filter');
+        if (barberFilter) {
+          barberFilter.addEventListener('change', (e) => {
+            renderServices(e.target.value);
+          });
+        }
+      } catch (error) {
+        console.error('Sayfa yüklenirken hata:', error);
+        const container = document.getElementById('services-container');
+        if (container) {
+          container.innerHTML = `
+            <div class="alert alert-danger">
+              Sistem yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.
+            </div>
+          `;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BerberApp - Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-cut"></i> BerberApp</h2>
+                <p>Admin Dashboard</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active" data-section="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</li>
+                    <li data-section="barbers"><i class="fas fa-user-tie"></i> Berberler</li>
+                    <li data-section="users"><i class="fas fa-users"></i> Kullanıcılar</li>
+                    <li data-section="appointments"><i class="fas fa-calendar-check"></i> Randevular</li>
+                    <li data-section="working-hours"><i class="fas fa-clock"></i> Çalışma Saatleri</li>
+                    <li data-section="services"><i class="fas fa-concierge-bell"></i> Hizmetler</li>
+                    <li data-section="reports"><i class="fas fa-chart-pie"></i> Raporlar</li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logout-btn"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle"><i class="fas fa-bars"></i></button>
+                    <h1 id="page-title">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="Admin">
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: rgba(67, 97, 238, 0.1); color: var(--primary);">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="barber-count">0</h3>
+                            <p>Berber</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: rgba(76, 201, 240, 0.1); color: var(--success);">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="user-count">0</h3>
+                            <p>Kullanıcı</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: rgba(239, 35, 60, 0.1); color: var(--danger);">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="appointment-count">0</h3>
+                            <p>Randevu</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: rgba(248, 150, 30, 0.1); color: var(--warning);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="revenue-count">0 ₺</h3>
+                            <p>Toplam Gelir</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Son Randevular</h3>
+                        <div class="chart-container">
+                            <canvas id="recent-appointments-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Hizmet Dağılımı</h3>
+                        <div class="chart-container">
+                            <canvas id="services-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Son Aktivite</h3>
+                    <div class="activity-list">
+                        <!-- Activity items will be added dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Barbers Section -->
+            <section id="barbers-section" class="content-section">
+                <div class="section-header">
+                    <h2>Berber Yönetimi</h2>
+                    <button class="btn-primary" id="add-barber-btn"><i class="fas fa-plus"></i> Yeni Berber Ekle</button>
+                </div>
+                
+                <div class="table-container">
+                    <table id="barbers-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Fotoğraf</th>
+                                <th>Ad Soyad</th>
+                                <th>Email</th>
+                                <th>Telefon</th>
+                                <th>Durum</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Barbers will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users-section" class="content-section">
+                <div class="section-header">
+                    <h2>Kullanıcı Yönetimi</h2>
+                </div>
+                
+                <div class="table-container">
+                    <table id="users-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Fotoğraf</th>
+                                <th>Ad Soyad</th>
+                                <th>Email</th>
+                                <th>Telefon</th>
+                                <th>Kayıt Tarihi</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Users will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Appointments Section -->
+            <section id="appointments-section" class="content-section">
+                <div class="section-header">
+                    <h2>Randevu Yönetimi</h2>
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="appointment-period">Periyot:</label>
+                            <select id="appointment-period">
+                                <option value="today">Bugün</option>
+                                <option value="week">Bu Hafta</option>
+                                <option value="month">Bu Ay</option>
+                                <option value="all">Tümü</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="appointment-status">Durum:</label>
+                            <select id="appointment-status">
+                                <option value="all">Tümü</option>
+                                <option value="confirmed">Onaylanmış</option>
+                                <option value="cancelled">İptal Edilmiş</option>
+                                <option value="completed">Tamamlanmış</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table id="appointments-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Kullanıcı</th>
+                                <th>Berber</th>
+                                <th>Tarih/Saat</th>
+                                <th>Hizmetler</th>
+                                <th>Toplam</th>
+                                <th>Durum</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Appointments will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Working Hours Section -->
+            <section id="working-hours-section" class="content-section">
+                <div class="section-header">
+                    <h2>Çalışma Saatleri Yönetimi</h2>
+                    <button class="btn-primary" id="add-working-hour-btn"><i class="fas fa-plus"></i> Yeni Çalışma Saati Ekle</button>
+                </div>
+                
+                <div class="table-container">
+                    <table id="working-hours-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Berber</th>
+                                <th>Gün</th>
+                                <th>Başlangıç</th>
+                                <th>Bitiş</th>
+                                <th>Aktif</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Working hours will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section id="services-section" class="content-section">
+                <div class="section-header">
+                    <h2>Hizmet Yönetimi</h2>
+                    <button class="btn-primary" id="add-service-btn"><i class="fas fa-plus"></i> Yeni Hizmet Ekle</button>
+                </div>
+                
+                <div class="table-container">
+                    <table id="services-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Ad</th>
+                                <th>Açıklama</th>
+                                <th>Süre (dk)</th>
+                                <th>Fiyat (₺)</th>
+                                <th>Durum</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Services will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports-section" class="content-section">
+                <div class="section-header">
+                    <h2>Raporlar</h2>
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="report-start-date">Başlangıç:</label>
+                            <input type="date" id="report-start-date">
+                        </div>
+                        <div class="filter-group">
+                            <label for="report-end-date">Bitiş:</label>
+                            <input type="date" id="report-end-date">
+                        </div>
+                        <button class="btn-primary" id="generate-report-btn">Rapor Oluştur</button>
+                    </div>
+                </div>
+                
+                <div class="report-results">
+                    <div class="report-summary">
+                        <div class="summary-card">
+                            <h3>Toplam Randevu</h3>
+                            <p id="total-appointments">0</p>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Toplam Gelir</h3>
+                            <p id="total-revenue">0 ₺</p>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Ortalama Randevu Süresi</h3>
+                            <p id="avg-appointment-duration">0 dk</p>
+                        </div>
+                        <div class="summary-card">
+                            <h3>En Popüler Hizmet</h3>
+                            <p id="popular-service">-</p>
+                        </div>
+                    </div>
+                    
+                    <div class="report-charts">
+                        <div class="chart-card">
+                            <h3>Randevu Dağılımı</h3>
+                            <div class="chart-container">
+                                <canvas id="appointments-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <h3>Gelir Analizi</h3>
+                            <div class="chart-container">
+                                <canvas id="revenue-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="add-barber-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Yeni Berber Ekle</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-barber-form">
+                    <div class="form-group">
+                        <label for="barber-name">Ad Soyad</label>
+                        <input type="text" id="barber-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="barber-email">Email</label>
+                        <input type="email" id="barber-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="barber-phone">Telefon</label>
+                        <input type="tel" id="barber-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="barber-bio">Biyografi</label>
+                        <textarea id="barber-bio" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="barber-photo">Fotoğraf</label>
+                        <input type="file" id="barber-photo" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn-primary">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="add-working-hour-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Yeni Çalışma Saati Ekle</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-working-hour-form">
+                    <div class="form-group">
+                        <label for="working-hour-barber">Berber</label>
+                        <select id="working-hour-barber" required>
+                            <!-- Barbers will be loaded here -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="working-hour-day">Gün</label>
+                        <select id="working-hour-day" required>
+                            <option value="Monday">Pazartesi</option>
+                            <option value="Tuesday">Salı</option>
+                            <option value="Wednesday">Çarşamba</option>
+                            <option value="Thursday">Perşembe</option>
+                            <option value="Friday">Cuma</option>
+                            <option value="Saturday">Cumartesi</option>
+                            <option value="Sunday">Pazar</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="working-hour-start">Başlangıç Saati</label>
+                        <input type="time" id="working-hour-start" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="working-hour-end">Bitiş Saati</label>
+                        <input type="time" id="working-hour-end" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="working-hour-active">Aktif</label>
+                        <input type="checkbox" id="working-hour-active" checked>
+                    </div>
+                    <button type="submit" class="btn-primary">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="add-service-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Yeni Hizmet Ekle</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-service-form">
+                    <div class="form-group">
+                        <label for="service-name">Hizmet Adı</label>
+                        <input type="text" id="service-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service-description">Açıklama</label>
+                        <textarea id="service-description" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="service-duration">Süre (dakika)</label>
+                        <input type="number" id="service-duration" min="5" step="5" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service-price">Fiyat (₺)</label>
+                        <input type="number" id="service-price" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service-active">Aktif</label>
+                        <input type="checkbox" id="service-active" checked>
+                    </div>
+                    <button type="submit" class="btn-primary">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="confirmation-modal">
+        <div class="modal-content small">
+            <div class="modal-header">
+                <h3 id="confirmation-title">Emin misiniz?</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmation-message">Bu işlem geri alınamaz.</p>
+                <div class="modal-actions">
+                    <button class="btn-secondary" id="cancel-confirmation">İptal</button>
+                    <button class="btn-danger" id="confirm-action">Sil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../assets/js/Admin.js"></script>
+</body>
+</html>

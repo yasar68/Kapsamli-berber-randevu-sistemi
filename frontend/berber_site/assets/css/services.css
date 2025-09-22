@@ -1,0 +1,238 @@
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2c3e50;
+  --accent-color: #e74c3c;
+  --price-color: #27ae60; /* Yeşil renk eklendi */
+  --light-color: #ecf0f1;
+  --dark-color: #2c3e50;
+  --text-color: #34495e;
+  --text-light: #7f8c8d;
+  --background-color: #f9f9f9;
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Sayfa genel stilleri */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-fluid {
+  max-width: 1800px;
+  padding: 2rem 3rem;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: var(--primary-color);
+  border-radius: 2px;
+}
+
+.filter-container {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.filter-container label {
+  font-weight: 600;
+  margin-right: 0.5rem;
+  color: var(--dark-color);
+}
+
+select {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid var(--primary-color);
+  cursor: pointer;
+  background-color: white;
+  color: var(--dark-color);
+  transition: var(--transition);
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+}
+
+#services-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  width: 100%;
+}
+
+.service-item {
+  display: flex;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+  border-left: 5px solid var(--primary-color);
+  min-height: 180px;
+  align-items: center;
+}
+
+.service-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.service-info {
+  flex: 1;
+  padding-right: 2rem;
+}
+
+.service-title {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--dark-color);
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.service-desc {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+}
+
+.service-meta {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.service-price-duration {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 160px;
+}
+
+.service-price {
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--price-color);
+  margin-bottom: 0.5rem;
+}
+
+.service-duration {
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+.no-services {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-light);
+  font-size: 1.2rem;
+}
+
+/* Responsive tasarım */
+@media (max-width: 1200px) {
+  .container-fluid {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .container-fluid {
+    padding: 1.5rem;
+  }
+  
+  .service-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.8rem;
+  }
+  
+  .service-info {
+    padding-right: 0;
+    margin-bottom: 1.5rem;
+    width: 100%;
+  }
+  
+  .service-price-duration {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    border-top: 1px solid var(--light-color);
+    padding-top: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container-fluid {
+    padding: 1.2rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  .service-item {
+    padding: 1.5rem;
+  }
+  
+  .service-title {
+    font-size: 1.4rem;
+  }
+  
+  .service-price {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .container-fluid {
+    padding: 1rem;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  .service-item {
+    padding: 1.3rem;
+  }
+  
+  .service-title {
+    font-size: 1.3rem;
+  }
+  
+  .service-desc {
+    font-size: 1rem;
+  }
+  
+  .service-price {
+    font-size: 1.3rem;
+  }
+}

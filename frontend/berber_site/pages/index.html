@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Berber Cumali - Anasayfa</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Özel CSS -->
+  <link rel="stylesheet" href="../assets/css/index.css" />
+</head>
+
+<body>
+  <!-- HEADER -->
+  <div id="header"></div>
+
+  <main class="main-container">
+    <!-- CAROUSEL -->
+    <div class="carousel-container" data-aos="fade-up">
+      <div id="berberCarousel" class="carousel slide carousel-fade shadow-lg rounded" data-bs-ride="carousel"
+        data-bs-interval="4500">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#berberCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+            aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#berberCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#berberCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner rounded">
+          <div class="carousel-item active">
+            <div class="carousel-img-container">
+              <img src="images/carousel1.png" class="d-block w-100" alt="Modern Saç Kesimi" />
+            </div>
+            <div class="carousel-caption">
+              <h2 class="display-5 fw-bold">Modern Saç Kesimi</h2>
+              <p class="lead">Uzman ekibimizle tarzınızı yenileyin.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-img-container">
+              <img src="images/carousel2.png" class="d-block w-100" alt="Profesyonel Sakal Tıraşı" />
+            </div>
+            <div class="carousel-caption">
+              <h2 class="display-5 fw-bold">Profesyonel Sakal Tıraşı</h2>
+              <p class="lead">Keskin ve özenli tıraş ile fark yaratın.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-img-container">
+              <img src="images/carousel3.png" class="d-block w-100" alt="Rahatlatıcı Cilt Bakımı" />
+            </div>
+            <div class="carousel-caption">
+              <h2 class="display-5 fw-bold">Rahatlatıcı Cilt Bakımı</h2>
+              <p class="lead">Cildinizi yenileyen özel bakım paketleri.</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#berberCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Önceki</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#berberCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Sonraki</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- HIZMETLER -->
+    <section class="container mb-5 fade-scroll" data-aos="fade-up" data-aos-delay="100">
+      <h2 class="section-title text-center mb-4 animate__animated animate__fadeInDown">
+        Hizmetlerimiz
+      </h2>
+      <div class="row text-center g-4">
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="service-card shadow-sm rounded">
+            <div class="service-icon">✂️</div>
+            <h5>Profesyonel Saç Kesimi</h5>
+            <p>Uzman ekibimizle modern ve tarz saç kesimi.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+          <div class="service-card shadow-sm rounded">
+            <div class="service-icon">🪒</div>
+            <h5>Özenli Sakal Tıraşı</h5>
+            <p>Keskin hatlarla profesyonel tıraş ve bakım.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="400">
+          <div class="service-card shadow-sm rounded">
+            <div class="service-icon">💆</div>
+            <h5>Rahatlatıcı Cilt Bakımı</h5>
+            <p>Cildinizi yenileyen ve canlandıran bakım paketi.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RANDEVU KARTI -->
+    <section class="container mb-5 fade-scroll" data-aos="fade-up" data-aos-delay="500">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0 animate__animated animate__fadeInLeft">
+          <a href="appointment.html" class="appointment-card text-decoration-none">
+            <h3>Randevu Al</h3>
+            <p>Tarzınıza tarz katmak için hemen randevunuzu alın.</p>
+            <button class="btn btn-primary btn-lg px-4 fw-semibold">
+              RANDEVU AL
+            </button>
+          </a>
+        </div>
+        <div class="col-lg-6 animate__animated animate__fadeInRight">
+          <img src="images/appointment.png" alt="Randevu" class="img-fluid rounded shadow" />
+        </div>
+      </div>
+    </section>
+
+    <!-- BERBER TANITIM -->
+    <section class="container mb-5 fade-scroll berber-section" data-aos="fade-up" data-aos-delay="600">
+      <div class="row align-items-center">
+        <div class="col-md-5 mb-4 mb-md-0 animate__animated animate__fadeInLeft">
+          <img src="images/berber-cumali.png" alt="Berber Cumali" class="img-fluid rounded shadow" />
+        </div>
+        <div class="col-md-7 animate__animated animate__fadeInRight">
+          <h2>Berber Cumali</h2>
+          <p class="berber-slogan">
+            "Her kesimde, sizin tarzınız."<br />
+            20+ yıllık deneyimle hizmetinizdeyiz.
+          </p>
+          <p>
+            Profesyonel ekip ve müşteri odaklı hizmet anlayışıyla,
+            tarzınıza tarz katıyoruz.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer"></div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    // Header yükleme ve başlatma sistemi
+    async function initializeHeader() {
+      try {
+        // 1. Header HTML'ini yükle
+        const headerHtml = await (await fetch('header.html')).text();
+        document.getElementById('header').innerHTML = headerHtml;
+
+        // 2. Header CSS'ini dinamik olarak ekle
+        const headerCss = document.createElement('link');
+        headerCss.rel = 'stylesheet';
+        headerCss.href = '../assets/css/header.css';
+        document.head.appendChild(headerCss);
+
+        // 3. Header JS'ini yükle
+        await new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = '../assets/js/Header.js';
+          script.onload = resolve;
+          script.onerror = reject;
+          script.defer = true;
+          document.head.appendChild(script);
+        });
+
+        // 4. Header'ın tam yüklenmesini bekle
+        await waitForHeaderElements();
+
+      } catch (error) {
+        console.error('Header başlatma hatası:', error);
+      }
+    }
+
+    // Gerekli elementler yüklenene kadar bekle
+    function waitForHeaderElements() {
+      return new Promise((resolve) => {
+        const checkInterval = setInterval(() => {
+          if (document.getElementById('user-area') &&
+            document.querySelector('.navbar-nav')) {
+            clearInterval(checkInterval);
+            resolve();
+          }
+        }, 50);
+      });
+    }
+
+    // Footer yükleme fonksiyonu
+    async function initializeFooter() {
+      try {
+        const footerHtml = await (await fetch('footer.html')).text();
+        document.getElementById('footer').innerHTML = footerHtml;
+
+        const footerCss = document.createElement('link');
+        footerCss.rel = 'stylesheet';
+        footerCss.href = '../assets/css/footer.css';
+        document.head.appendChild(footerCss);
+      } catch (error) {
+        console.error('Footer yükleme hatası:', error);
+      }
+    }
+
+    // Sayfa başlatma
+    async function initializePage() {
+      // Önce header ve footer'ı yükle
+      await Promise.all([
+        initializeHeader(),
+        initializeFooter()
+      ]);
+
+      // Sonra diğer bağımlı scriptleri çalıştır
+      AOS.init({ duration: 1000, once: true });
+
+      // Ekstra kontrol
+      if (typeof initHeader === 'function') {
+        initHeader();
+      }
+    }
+
+    // Sayfa yüklendiğinde başlat
+    document.addEventListener('DOMContentLoaded', initializePage);
+
+    // Sayfa geçişlerinde (turbo links vs. için)
+    document.addEventListener('turbo:load', initializePage);
+    window.addEventListener('pageshow', initializePage);
+  </script>
+</body>
+
+</html>
