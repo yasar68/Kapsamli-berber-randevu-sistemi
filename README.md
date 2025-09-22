@@ -80,16 +80,19 @@ frontend/ # HTML, CSS, JS
 ## 🚀 Kurulum
 
 1. Repo’yu klonlayın:  
+
     ```bash
         git clone https://github.com/yasar68/      Kapsamli-berber-randevu-sistemi.git
 
 2. Backend’e gidin ve bağımlılıkları yükleyin:
+
     ```bash
         cd backend/BerberApp.API
         dotnet restore
         dotnet run
 
 3. Frontend’i tarayıcıda çalıştırmak için kök dizinde:
+
     ```bash
         python -m http.server 8000
 
